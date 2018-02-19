@@ -1,0 +1,6 @@
+file(GLOB SOURCES "${CMAKE_CURRENT_SOURCE_DIR}" "*.c")
+add_library(${PROJECT_NAME} SHARED ${SOURCES})
+
+if(XDG_BASEDIR_FOUND)
+	target_link_libraries(${PROJECT_NAME} ${XDG_BASEDIR_LIBRARIES})
+endif()
