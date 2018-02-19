@@ -1,4 +1,5 @@
 #include "appdir.h"
+#include "internal.h"
 
 #include <errno.h>
 #include <stdlib.h>
@@ -40,6 +41,7 @@ static char *__appdir_home(const char *name,
 }
 
 char *appdir_data(const char *name, const char *author) {
+	UNUSED(author);
 	return __appdir_home(name, xdgDataHome, NULL);
 }
 
@@ -85,23 +87,27 @@ static char **__appdir_dirs(const char *name,
 }
 
 char **appdir_data_dirs(const char *name, const char *author) {
+	UNUSED(author);
 	return __appdir_dirs(name, xdgSearchableDataDirectories, NULL);
 }
 
 char *appdir_cfg(const char *name, const char *author) {
+	UNUSED(author);
 	return __appdir_home(name, xdgConfigHome, NULL);
 }
 
 char **appdir_cfg_path(const char *name, const char *author) {
+	UNUSED(author);
 	return __appdir_dirs(name, xdgSearchableConfigDirectories, NULL);
 }
 
 char *appdir_cache(const char *name, const char *author) {
+	UNUSED(author);
 	return __appdir_home(name, xdgCacheHome, NULL);
 }
 
 static const char log[] = "/log";
-static char *__appdir_log(const char *name, const char *cache, xdgHandle *h) {
+static char *__appdir_log(const char *cache) {
 	size_t cache_len;
 	char *ret;
 
@@ -120,14 +126,14 @@ static char *__appdir_log(const char *name, const char *cache, xdgHandle *h) {
 }
 
 char *appdir_log(const char *name, const char *author) {
-	return __appdir_log(name,
-			    __appdir_home(name, xdgCacheHome, NULL),
-			    NULL);
+	UNUSED(author);
+	return __appdir_log(__appdir_home(name, xdgCacheHome, NULL));
 }
 
 struct appdir *appdir(const char *name, const char *author) {
 	struct appdir *ret;
 	xdgHandle h;
+	UNUSED(author);
 
 	if (!name) {
 		errno = EINVAL;
@@ -148,7 +154,7 @@ struct appdir *appdir(const char *name, const char *author) {
 		|| (!(ret->cfg_dirs =
 			__appdir_dirs(name, xdgSearchableConfigDirectories, &h)))
 		|| (!(ret->cache = __appdir_home(name, xdgCacheHome, &h)))
-		|| (!(ret->log = __appdir_log(name, ret->cache, &h))))
+		|| (!(ret->log = __appdir_log(ret->cache))))
 		return NULL;
 
 	xdgWipeHandle(&h);

@@ -18,4 +18,16 @@ include_directories("${CMAKE_SOURCE_DIR}/include")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
+# Add -Wall or equivalent
+if(MSVC)
+	# Force to always compile with W4
+	if(CMAKE_C_FLAGS MATCHES "/W[0-4]")
+		string(REGEX REPLACE "/W[0-4]" "/W4" CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
+	else()
+		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /W4")
+	endif()
+else()
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -pedantic")
+endif()
+
 add_subdirectory("${CMAKE_SOURCE_DIR}/src")

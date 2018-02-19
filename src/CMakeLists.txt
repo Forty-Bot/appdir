@@ -4,3 +4,8 @@ add_library(${PROJECT_NAME} SHARED ${SOURCES})
 if(XDG_BASEDIR_FOUND)
 	target_link_libraries(${PROJECT_NAME} ${XDG_BASEDIR_LIBRARIES})
 endif()
+
+# Set the standard to C89
+set(C_STANDARD_REQUIRED ON)
+set_property(TARGET ${PROJECT_NAME} PROPERTY C_STANDARD 90)
+set_property(TARGET ${PROJECT_NAME} PROPERTY C_EXTENSIONS OFF)
