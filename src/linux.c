@@ -66,7 +66,7 @@ static char **__appdir_dirs(const char *name,
 	while (dirs[dirs_len++]);
 	dirs_len--;
 
-	ret = malloc(sizeof(*ret) * dirs_len);
+	ret = malloc(sizeof(*ret) * (dirs_len + 1));
 	if (!ret)
 		return NULL;
 	for (i = 0; i < dirs_len; i++) {
@@ -79,10 +79,11 @@ static char **__appdir_dirs(const char *name,
 		
 		memcpy(ret[i], dirs[i], dir_len);
 		ret[i][dir_len] = DIR_SEP;
-		memcpy(ret + dir_len + 1, name, name_len);
+		memcpy(ret[i] + dir_len + 1, name, name_len);
 		ret[i][ret_len] = '\0';
 	}
-	
+	ret[dirs_len] = NULL;
+
 	return ret;
 }
 
