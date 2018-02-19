@@ -1,3 +1,3 @@
-#include "appdirs.h"
+#include "appdir.h"
 
 #include <basedir.h>

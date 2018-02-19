@@ -5,7 +5,7 @@ if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
 		"In-source builds not allowed. Please make a new directory and run CMake from there. You may need to remove CMakeCache.txt.")
 endif()
 
-set(PROJECT_NAME appdirs)
+set(PROJECT_NAME appdir)
 project(${PROJECT_NAME} VERSION 0.0.1.0)
 
 find_package(PkgConfig REQUIRED)

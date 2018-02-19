@@ -1,5 +1,5 @@
-#ifndef APPDIRS_H
-#define APPDIRS_H
+#ifndef APPDIR_H
+#define APPDIR_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -11,4 +11,4 @@ extern "C" {
 }
 #endif
 
-#endif /* APPDIRS_H */
+#endif /* APPDIR_H */
