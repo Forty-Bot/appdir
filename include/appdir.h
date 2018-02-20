@@ -13,9 +13,7 @@ char *appdir_cache(const char *name, const char *author);
 char *appdir_log(const char *name, const char *author);
 
 struct appdir {
-	char *data;
 	char **data_dirs;
-	char *cfg;
 	char **cfg_dirs;
 	char *cache;
 	char *log;

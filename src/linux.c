@@ -148,14 +148,12 @@ struct appdir *appdir(const char *name, const char *author) {
 	if (!ret)
 		return NULL;
 	
-	if (!(ret->data = __appdir_home(name, xdgDataHome, &h))
-		|| !(ret->data_dirs =
-			__appdir_dirs(name, xdgSearchableDataDirectories, &h)))
-		|| !(ret->cfg = __appdir_home(name, xdgConfigHome, &h))
+	if (!(ret->data_dirs =
+		__appdir_dirs(name, xdgSearchableDataDirectories, &h))
 		|| !(ret->cfg_dirs =
 			__appdir_dirs(name, xdgSearchableConfigDirectories, &h))
 		|| !(ret->cache = __appdir_home(name, xdgCacheHome, &h))
-		|| !(ret->log = __appdir_log(ret->cache))
+		|| !(ret->log = __appdir_log(ret->cache)))
 		return NULL;
 
 	xdgWipeHandle(&h);
