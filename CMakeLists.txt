@@ -8,8 +8,8 @@ endif()
 set(PROJECT_NAME appdir)
 project(${PROJECT_NAME} VERSION 0.0.1.0)
 
-find_package(PkgConfig REQUIRED)
 if(UNIX AND NOT APPLE)
+	find_package(PkgConfig REQUIRED)
 	pkg_check_modules(XDG_BASEDIR REQUIRED libxdg-basedir)
 endif()
 
