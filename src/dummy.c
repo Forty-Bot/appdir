@@ -33,6 +33,6 @@ char *appdir_log(const char *name, const char *author) {
 	UNIMPLEMENTED;
 }
 
-struct appdir *appdir(const char *name, const char *author) {
+struct appdir *appdir_get(const char *name, const char *author) {
 	UNIMPLEMENTED;
 }
