@@ -62,9 +62,9 @@ char *test_equiv() {
 }
 
 int main() {
-	char *res = test_equiv();
-	if (res)
-		fprintf(stderr, "%s\n", res);
+	char *ret = test_equiv();
+	if (ret)
+		fprintf(stderr, "%s\n", ret);
 
-	return !!res;
+	return !!ret;
 }
