@@ -29,8 +29,8 @@ static char *__appdir_home(const char *name,
 	home_len = strlen(home);
 	
 	/* +1 for the separator */
-	ret_len = home_len + 1 + name_len + 1;
-	ret = malloc(ret_len);
+	ret_len = home_len + 1 + name_len;
+	ret = malloc(ret_len + 1);
 	if (!ret)
 		return NULL;
 	memcpy(ret, home, home_len);
@@ -71,9 +71,9 @@ static char **__appdir_dirs(const char *name,
 		return NULL;
 	for (i = 0; i < dirs_len; i++) {
 		size_t dir_len = strlen(dirs[i]);
-		size_t ret_len = dir_len + 1 + name_len + 1;
+		size_t ret_len = dir_len + 1 + name_len;
 
-		ret[i] = malloc(ret_len);
+		ret[i] = malloc(ret_len + 1);
 		if (!ret[i])
 			return NULL;
 		
