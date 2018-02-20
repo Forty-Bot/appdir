@@ -97,7 +97,7 @@ char *appdir_cfg(const char *name, const char *author) {
 	return __appdir_home(name, xdgConfigHome, NULL);
 }
 
-char **appdir_cfg_path(const char *name, const char *author) {
+char **appdir_cfg_dirs(const char *name, const char *author) {
 	UNUSED(author);
 	return __appdir_dirs(name, xdgSearchableConfigDirectories, NULL);
 }
