@@ -1,0 +1,16 @@
+DOXYFILE_ENCODING      = UTF-8
+PROJECT_NAME           = "c-appdir"
+PROJECT_BRIEF          = "C library for finding platform-specific dirs"
+
+TAB_SIZE               = 8
+OPTIMIZE_OUTPUT_FOR_C  = YES
+QUIET                  = YES
+
+INPUT                  = @CMAKE_SOURCE_DIR@/include
+FILE_PATTERNS          = *.h
+RECURSIVE              = NO
+EXCLUDE_PATTERNS       = internal.h
+
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+GENERATE_LATEX         = NO
