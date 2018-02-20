@@ -4,4 +4,4 @@
 *.o
 *.cmd
 tags
-build/*
+*build/*
