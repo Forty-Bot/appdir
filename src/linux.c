@@ -131,7 +131,7 @@ char *appdir_log(const char *name, const char *author) {
 	return __appdir_log(__appdir_home(name, xdgCacheHome, NULL));
 }
 
-struct appdir *appdir(const char *name, const char *author) {
+struct appdir *appdir_get(const char *name, const char *author) {
 	struct appdir *ret;
 	xdgHandle h;
 	UNUSED(author);

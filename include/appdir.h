@@ -12,6 +12,8 @@ char **appdir_cfg_dirs(const char *name, const char *author);
 char *appdir_cache(const char *name, const char *author);
 char *appdir_log(const char *name, const char *author);
 
+void appdir_list_put(char **dirs);
+
 struct appdir {
 	char **data_dirs;
 	char **cfg_dirs;
@@ -19,7 +21,8 @@ struct appdir {
 	char *log;
 };
 
-struct appdir *appdir(const char *name, const char *author);
+struct appdir *appdir_get(const char *name, const char *author);
+void appdir_put(struct appdir *ad);
 
 #ifdef __cplusplus
 }
