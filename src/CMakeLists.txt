@@ -1,4 +1,14 @@
-file(GLOB SOURCES "${CMAKE_CURRENT_SOURCE_DIR}" "*.c")
+set(SOURCES appdir.c)
+if(UNIX)
+	if(APPLE)
+		list(APPEND SOURCES dummy.c)
+	else()
+		list(APPEND SOURCES linux.c)
+	endif()
+elseif(WIN32)
+	list(APPEND SOURCES dummy.c)
+endif()
+
 add_library(${PROJECT_NAME} SHARED ${SOURCES})
 
 if(XDG_BASEDIR_FOUND)
