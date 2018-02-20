@@ -1,4 +1,5 @@
 #include "appdir.h"
+#include "internal.h"
 
 #include <errno.h>
 #include <stdio.h>
@@ -7,7 +8,7 @@
 #define ENOSYS 38
 #endif
 
-#define UNIMPLEMENTED errno = ENOSYS; return NULL
+#define UNIMPLEMENTED UNUSED(name); UNUSED(author); errno = ENOSYS; return NULL
 
 char *appdir_data(const char *name, const char *author) {
 	UNIMPLEMENTED;
