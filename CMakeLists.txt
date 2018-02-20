@@ -31,3 +31,4 @@ else()
 endif()
 
 add_subdirectory("${CMAKE_SOURCE_DIR}/src")
+add_subdirectory("${CMAKE_SOURCE_DIR}/test")
