@@ -7,7 +7,7 @@ extern "C" {
 
 char *appdir_data(const char *name, const char *author);
 char **appdir_data_dirs(const char *name, const char *author);
-char *appdir_cfg(const char *name, const char *authoro);
+char *appdir_cfg(const char *name, const char *author);
 char **appdir_cfg_dirs(const char *name, const char *author);
 char *appdir_cache(const char *name, const char *author);
 char *appdir_log(const char *name, const char *author);
