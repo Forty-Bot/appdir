@@ -13,6 +13,7 @@ static char *appdir_home(const char *name,
 			 const char *xdg_home(xdgHandle *), xdgHandle *h) {
 	const char *home;
 	char *ret;
+	char *p;
 	size_t name_len;
 	size_t ret_len;
 	size_t home_len;
@@ -33,10 +34,18 @@ static char *appdir_home(const char *name,
 	ret = malloc(ret_len + 1);
 	if (!ret)
 		return NULL;
-	memcpy(ret, home, home_len);
-	ret[home_len] = DIR_SEP;
-	memcpy(ret + home_len + 1, name, name_len);
-	ret[ret_len] = '\0';
+	p = ret;
+
+	memcpy(p, home, home_len);
+	p += home_len;
+
+	*p++ = DIR_SEP;
+
+	memcpy(p, name, name_len);
+	p += name_len;
+
+	*p = '\0';
+
 	return ret;
 }
 
@@ -70,17 +79,29 @@ static char **appdir_dirs(const char *name,
 	if (!ret)
 		return NULL;
 	for (i = 0; i < dirs_len; i++) {
+		char *p;
 		size_t dir_len = strlen(dirs[i]);
 		size_t ret_len = dir_len + 1 + name_len;
 
 		ret[i] = malloc(ret_len + 1);
-		if (!ret[i])
+		if (!ret[i]) {
+			size_t j;
+			for (j = 0; j < i; j++)
+				free(ret[j]);
+			free(ret);
 			return NULL;
-		
-		memcpy(ret[i], dirs[i], dir_len);
-		ret[i][dir_len] = DIR_SEP;
-		memcpy(ret[i] + dir_len + 1, name, name_len);
-		ret[i][ret_len] = '\0';
+		}
+		p = ret[i];
+
+		memcpy(p, dirs[i], dir_len);
+		p += dir_len;
+
+		*p++ = DIR_SEP;
+
+		memcpy(p, name, name_len);
+		p += name_len;
+
+		*p = '\0';
 	}
 	ret[dirs_len] = NULL;
 
