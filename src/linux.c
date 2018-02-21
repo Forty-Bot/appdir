@@ -107,28 +107,16 @@ char *appdir_cache(const char *name, const char *author) {
 	return __appdir_home(name, xdgCacheHome, NULL);
 }
 
-static const char log[] = "/log";
-static char *__appdir_log(const char *cache) {
-	size_t cache_len;
+char *appdir_log(const char *name, const char *author) {
 	char *ret;
+	char *cache = appdir_home(name, xdgCacheHome, NULL);
+	UNUSED(author);
 
 	if (!cache)
 		return NULL;
-	cache_len = strlen(cache);
-
-	/* sizeof(log) includes the null terminator */
-	ret = malloc(cache_len + sizeof(log));
-	if (!ret)
-		return NULL;
-
-	memcpy(ret, cache, cache_len);
-	memcpy(ret + cache_len, log, sizeof(log));
+	ret = appdir_append(cache, "/log");
+	free(cache);
 	return ret;
-}
-
-char *appdir_log(const char *name, const char *author) {
-	UNUSED(author);
-	return __appdir_log(__appdir_home(name, xdgCacheHome, NULL));
 }
 
 struct appdir *appdir_get(const char *name, const char *author) {
@@ -153,7 +141,7 @@ struct appdir *appdir_get(const char *name, const char *author) {
 		|| !(ret->cfg_dirs =
 			__appdir_dirs(name, xdgSearchableConfigDirectories, &h))
 		|| !(ret->cache = __appdir_home(name, xdgCacheHome, &h))
-		|| !(ret->log = __appdir_log(ret->cache)))
+		|| !(ret->log = appdir_append(ret->cache, "/log")))
 		return NULL;
 
 	xdgWipeHandle(&h);
