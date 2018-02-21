@@ -31,7 +31,8 @@ extern "C" {
  *  \param name The name of your program
  *  \param author The author or organization which produced the program. This
  *  defaults to \a name.
- *  \return A `malloc`'d string containing the data directory.
+ *  \return A `malloc`'d string containing the data directory. On error, `NULL`
+ *  is returned and `errno` is set.
  */
 char *appdir_data(const char *name, const char *author);
 
@@ -52,6 +53,7 @@ char *appdir_data(const char *name, const char *author);
  *  defaults to \a name.
  *  \return A `malloc`'d `NULL`-terminated list of strings allocated with
  *  `malloc`. They can be `free`'d individually, or by using appdir_list_put().
+ *  On error, `NULL` is returned and `errno` is set.
  */
 char **appdir_data_dirs(const char *name, const char *author);
 
@@ -67,7 +69,8 @@ char **appdir_data_dirs(const char *name, const char *author);
  *  \param name The name of your program
  *  \param author The author or organization which produced the program. This
  *  defaults to \a name.
- *  \return A `malloc`'d string containing the configuration directory.
+ *  \return A `malloc`'d string containing the configuration directory. On
+ *  error, `NULL` is returned and `errno` is set.
  */
 char *appdir_cfg(const char *name, const char *author);
 
@@ -88,6 +91,7 @@ char *appdir_cfg(const char *name, const char *author);
  *  defaults to \a name.
  *  \return A `malloc`'d `NULL`-terminated list of strings allocated with
  *  `malloc`. They can be `free`'d individually, or by using appdir_list_put().
+ *  On error, `NULL` is returned and `errno` is set.
  */
 char **appdir_cfg_dirs(const char *name, const char *author);
 
@@ -104,7 +108,8 @@ char **appdir_cfg_dirs(const char *name, const char *author);
  *  \param name The name of your program
  *  \param author The author or organization which produced the program. This
  *  defaults to \a name.
- *  \return A `malloc`'d string containing the cache directory.
+ *  \return A `malloc`'d string containing the cache directory. On error, `NULL`
+ *  is returned and `errno` is set.
  */
 char *appdir_cache(const char *name, const char *author);
 
@@ -121,7 +126,8 @@ char *appdir_cache(const char *name, const char *author);
  *  \param name The name of your program
  *  \param author The author or organization which produced the program. This
  *  defaults to \a name.
- *  \return A `malloc`'d string containing the logging directory.
+ *  \return A `malloc`'d string containing the logging directory. On error,
+ *  `NULL` is returned and `errno` is set.
  */
 char *appdir_log(const char *name, const char *author);
 
@@ -159,7 +165,8 @@ struct appdir {
  *  \param name The name of your program
  *  \param author The author or organization which produced the program. This
  *  defaults to \a name.
- *  \return A `malloc`'d and appropriately initialized `struct` \ref appdir.
+ *  \return A `malloc`'d and appropriately initialized `struct` \ref appdir. On
+ *  error, `NULL` is returned and `errno` is set.
  *  \sa appdir_put
  */
 struct appdir *appdir_get(const char *name, const char *author);
