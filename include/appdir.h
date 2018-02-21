@@ -4,6 +4,12 @@
 /** \file appdir.h
  *  \brief The public api of c-appdir.
  *
+ *  Some implementations rely on `getenv` to determine directories. Calling
+ *  `setenv` while in any function except appdir_list_put() or appdir_put() in
+ *  c-appdir may cause a data-race. **None of the functions in c-appdir are
+ *  thread-safe** for this reason. Call c-appdir functions before spawning
+ *  threads which call `setenv`.
+ *
  *  All returned values are allocated with `malloc` and can be `free`'d either
  *  piecemeal, or with appdir_list_put() or appdir_put().
  */
