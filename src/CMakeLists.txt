@@ -6,7 +6,7 @@ if(UNIX)
 		list(APPEND SOURCES linux.c)
 	endif()
 elseif(WIN32)
-	list(APPEND SOURCES dummy.c)
+	list(APPEND SOURCES windows.c)
 endif()
 
 add_library(${PROJECT_NAME} SHARED ${SOURCES})
