@@ -9,7 +9,7 @@
 
 #define DIR_SEP '/'
 
-static char *__appdir_home(const char *name,
+static char *appdir_home(const char *name,
 			 const char *xdg_home(xdgHandle *), xdgHandle *h) {
 	const char *home;
 	char *ret;
@@ -42,10 +42,10 @@ static char *__appdir_home(const char *name,
 
 char *appdir_data(const char *name, const char *author) {
 	UNUSED(author);
-	return __appdir_home(name, xdgDataHome, NULL);
+	return appdir_home(name, xdgDataHome, NULL);
 }
 
-static char **__appdir_dirs(const char *name,
+static char **appdir_dirs(const char *name,
 			    const char *const *xdg_dirs(xdgHandle *),
 			    xdgHandle *h) {
 	const char *const *dirs;
@@ -89,22 +89,22 @@ static char **__appdir_dirs(const char *name,
 
 char **appdir_data_dirs(const char *name, const char *author) {
 	UNUSED(author);
-	return __appdir_dirs(name, xdgSearchableDataDirectories, NULL);
+	return appdir_dirs(name, xdgSearchableDataDirectories, NULL);
 }
 
 char *appdir_cfg(const char *name, const char *author) {
 	UNUSED(author);
-	return __appdir_home(name, xdgConfigHome, NULL);
+	return appdir_home(name, xdgConfigHome, NULL);
 }
 
 char **appdir_cfg_dirs(const char *name, const char *author) {
 	UNUSED(author);
-	return __appdir_dirs(name, xdgSearchableConfigDirectories, NULL);
+	return appdir_dirs(name, xdgSearchableConfigDirectories, NULL);
 }
 
 char *appdir_cache(const char *name, const char *author) {
 	UNUSED(author);
-	return __appdir_home(name, xdgCacheHome, NULL);
+	return appdir_home(name, xdgCacheHome, NULL);
 }
 
 char *appdir_log(const char *name, const char *author) {
@@ -137,10 +137,10 @@ struct appdir *appdir_get(const char *name, const char *author) {
 		return NULL;
 	
 	if (!(ret->data_dirs =
-		__appdir_dirs(name, xdgSearchableDataDirectories, &h))
+		appdir_dirs(name, xdgSearchableDataDirectories, &h))
 		|| !(ret->cfg_dirs =
-			__appdir_dirs(name, xdgSearchableConfigDirectories, &h))
-		|| !(ret->cache = __appdir_home(name, xdgCacheHome, &h))
+			appdir_dirs(name, xdgSearchableConfigDirectories, &h))
+		|| !(ret->cache = appdir_home(name, xdgCacheHome, &h))
 		|| !(ret->log = appdir_append(ret->cache, "/log")))
 		return NULL;
 
