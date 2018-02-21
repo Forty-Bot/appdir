@@ -9,3 +9,4 @@ function(add_custom_test TEST_NAME SOURCES)
 endfunction()
 
 add_custom_test(equiv equiv.c)
+add_custom_test(print print.c)
