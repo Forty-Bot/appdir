@@ -18,7 +18,7 @@
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
 	set(DOXYFILE "${CMAKE_CURRENT_BINARY_DIR}/doxyfile")
-	set(DOCSTAMP "${CMAKE_CURRENT_BINARY_DIR}/doxygenstamp")
+	set(DOCSTAMP "${CMAKE_CURRENT_BINARY_DIR}/doxygen.stamp")
 	set(DOCSRC "${CMAKE_SOURCE_DIR}/include/appdir.h")
 	configure_file(doxyfile.in ${DOXYFILE} @ONLY)
 	add_custom_command(OUTPUT ${DOCSTAMP}
