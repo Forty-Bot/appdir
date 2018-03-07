@@ -24,6 +24,7 @@ endif()
 
 set(PROJECT_NAME appdir)
 project(${PROJECT_NAME} VERSION 0.0.1.0)
+	DESCRIPTION "C library for finding platform-specific dirs")
 
 if(UNIX AND NOT APPLE)
 	find_package(PkgConfig REQUIRED)
