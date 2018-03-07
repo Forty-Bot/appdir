@@ -27,9 +27,18 @@ if(DOXYGEN_FOUND)
 		DEPENDS ${DOXYFILE} ${DOCSRC}
 		COMMENT "Generating Documentation"
 		VERBATIM)
+
 	if(CMAKE_BUILD_TYPE STREQUAL "Release")
 		add_custom_target(doc ALL DEPENDS ${DOCSTAMP})
 	else()
 		add_custom_target(doc DEPENDS ${DOCSTAMP})
+	endif()
+
+	if(UNIX AND NOT APPLE)
+		install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html"
+			DESTINATION "share/doc/${PROJECT_NAME}")
+	else()
+		install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+			DESTINATION ./)
 	endif()
 endif()

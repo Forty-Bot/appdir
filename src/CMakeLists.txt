@@ -31,3 +31,11 @@ add_library(${PROJECT_NAME} SHARED ${SOURCES})
 if(XDG_BASEDIR_FOUND)
 	target_link_libraries(${PROJECT_NAME} ${XDG_BASEDIR_LIBRARIES})
 endif()
+
+if(UNIX AND NOT APPLE)
+	install(TARGETS ${PROJECT_NAME}
+		DESTINATION lib)
+else()
+	install(TARGETS ${PROJECT_NAME}
+		DESTINATION .)
+endif()
