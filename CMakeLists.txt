@@ -69,7 +69,6 @@ if(UNIX AND NOT APPLE)
 	pkg_check_modules(XDG_BASEDIR REQUIRED libxdg-basedir)
 endif()
 
-
 include_directories("${CMAKE_SOURCE_DIR}/include")
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
@@ -104,6 +103,7 @@ include(GNUInstallDirs)
 add_subdirectory("${CMAKE_SOURCE_DIR}/src")
 add_subdirectory("${CMAKE_SOURCE_DIR}/test" EXCLUDE_FROM_ALL)
 add_subdirectory("${CMAKE_SOURCE_DIR}/doc")
+add_subdirectory("${CMAKE_SOURCE_DIR}/include")
 
 set(CPACK_PACKAGE_CONTACT "seanga2@gmail.com")
 set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_SOURCE_DIR}/README.md")
