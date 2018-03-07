@@ -35,6 +35,7 @@ if(GIT_FOUND)
 		"describe" "--long" "--tags"
 		RESULT_VARIABLE GIT_RES
 		OUTPUT_VARIABLE GIT_OUT)
+	# Note that a successful result (0) is FALSE
 	if(NOT GIT_RES)
 		string(REGEX REPLACE "([^-]*-g)" "r\\1" TMP ${GIT_OUT})
 		string(REPLACE "-" "." TMP ${TMP})
@@ -96,6 +97,9 @@ endif()
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_STANDARD 90)
 set(CMAKE_C_EXTENSIONS OFF)
+
+# Initialize install dir helpers
+include(GNUInstallDirs)
 
 add_subdirectory("${CMAKE_SOURCE_DIR}/src")
 add_subdirectory("${CMAKE_SOURCE_DIR}/test" EXCLUDE_FROM_ALL)
