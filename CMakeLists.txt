@@ -23,13 +23,51 @@ if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
 endif()
 
 set(PROJECT_NAME appdir)
-project(${PROJECT_NAME} VERSION 0.0.1
+project(${PROJECT_NAME}
 	DESCRIPTION "C library for finding platform-specific dirs")
+
+# Try to get the version from git
+# nicked from https://wiki.archlinux.org/index.php/VCS_package_guidelines#Git
+find_package(Git)
+if(GIT_FOUND)
+	# First try to base the version off a tag
+	execute_process(COMMAND ${GIT_EXECUTABLE}
+		"describe" "--long" "--tags"
+		RESULT_VARIABLE GIT_RES
+		OUTPUT_VARIABLE GIT_OUT)
+	if(NOT GIT_RES)
+		string(REGEX REPLACE "([^-]*-g)" "r\\1" TMP ${GIT_OUT})
+		string(REPLACE "-" "." TMP ${TMP})
+		string(REPLACE "\n" "" PROJECT_VERSION ${TMP})
+	else()
+		# if that doesn't work, we can always make something based
+		# on the hash and revision count
+		execute_process(COMMAND ${GIT_EXECUTABLE}
+			"rev-list" "--count" "HEAD"
+			RESULT_VARIABLE REV_COUNT_RES
+			OUTPUT_VARIABLE REV_COUNT)
+		execute_process(COMMAND ${GIT_EXECUTABLE}
+			"rev-parse" "--short" "HEAD"
+			RESULT_VARIABLE REV_SHORT_RES
+			OUTPUT_VARIABLE REV_SHORT)
+		if(NOT (REV_COUNT_RES OR REV_SHORT_RES))
+			string(REPLACE "\n" "" PROJECT_VERSION
+				"r${REV_COUNT}.${REV_SHORT}")
+		endif()
+	endif()
+endif()
+
+if(NOT PROJECT_VERSION)
+	set(PROJECT_VERSION "0.0.1.0")
+endif()
+
+message(STATUS "Configuring ${PROJECT_NAME}-${PROJECT_VERSION}")
 
 if(UNIX AND NOT APPLE)
 	find_package(PkgConfig REQUIRED)
 	pkg_check_modules(XDG_BASEDIR REQUIRED libxdg-basedir)
 endif()
+
 
 include_directories("${CMAKE_SOURCE_DIR}/include")
 
@@ -65,9 +103,7 @@ add_subdirectory("${CMAKE_SOURCE_DIR}/doc")
 
 set(CPACK_PACKAGE_CONTACT "seanga2@gmail.com")
 set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_SOURCE_DIR}/README.md")
-set(CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
-set(CPACK_PACKAGE_VERSION_MINOR ${PROJECT_VERSION_MINOR})
-set(CPACK_PACKAGE_VERSION_PATCH ${PROJECT_VERSION_PATCH})
+set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
 
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/COPYING.LESSER")
 set(CPACK_RESOURCE_FILE_README "${CMAKE_SOURCE_DIR}/README.md")
