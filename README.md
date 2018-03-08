@@ -1,6 +1,6 @@
-# c-appdir
+# appdir
 
-c-appdir is a library for finding platform-specific dirs. Unfortunately, there
+appdir is a library for finding platform-specific dirs. Unfortunately, there
 is no platform-agnostic way to open a file given a directory and a filename.
 There are several file libraries for C which provide this and more already
 (e.g. [APR](https://apr.apache.org/docs/apr/trunk/group__apr__file__io.html),
