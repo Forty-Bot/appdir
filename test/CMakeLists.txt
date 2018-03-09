@@ -21,7 +21,7 @@ add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND})
 function(add_custom_test TEST_NAME SOURCES)
 	add_executable(${TEST_NAME} ${SOURCES})
 	target_link_libraries(${TEST_NAME} ${PROJECT_NAME})
-	set(TARGET ${TEST_NAME}
+	set_property(TARGET ${TEST_NAME}
 		PROPERTY RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 	add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME}
 		WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
