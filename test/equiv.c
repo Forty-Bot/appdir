@@ -18,20 +18,11 @@
  */
 
 #include "appdir.h"
+#include "test.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-/* Stolen from <http://www.jera.com/techinfo/jtns/jtn002.html> */
-#define stringify2(x) #x
-#define stringify(x) stringify2(x)
-#define __LINE_STR__ stringify(__LINE__)
-#define assert(message, test) do { if (!(test)) \
-	return (__FILE__ ":" __LINE_STR__ ": " message); } while (0)
-#define assert_nonnull(var) assert(#var " is NULL", (var))
-#define assert_eq(x, y) assert(#x " does not equal " #y, (x) == (y))
-#define assert_streq(x, y) assert(#x " does not equal " #y, !strcmp((x), (y)))
 
 /* Test basic equalities and equivalencies */
 char *test_equiv() {
@@ -41,20 +32,6 @@ char *test_equiv() {
 	
 	ad = appdir_get("name", "author");
 	assert_nonnull(ad);
-
-#define assert_strlisteq(l1, l2) \
-	do { \
-		size_t i; \
-		assert_nonnull(l1); \
-		assert_nonnull(l2); \
-		for (i = 0; l1[i] && l2[i]; i++) { \
-			assert_nonnull(l1[i]); \
-			assert_nonnull(l2[i]); \
-			assert_streq(l1[i], l2[i]); \
-		} \
-		assert_eq(l1[i], l2[i]); \
-		assert("One of " #l1 " or " #l2 " is empty", i > 0); \
-	} while (0)
 
 	dirs = appdir_data_dirs("name", "author");
 	assert_strlisteq(ad->data_dirs, dirs);
