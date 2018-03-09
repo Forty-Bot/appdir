@@ -30,4 +30,5 @@ endfunction()
 
 add_custom_test(equiv equiv.c)
 add_custom_test(fallbacks fallbacks.c)
+add_custom_test(invalids invalids.c)
 add_custom_test(print print.c)
