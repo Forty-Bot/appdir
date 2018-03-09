@@ -15,5 +15,10 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with appdir. If not, see <http://www.gnu.org/licenses/>.
 
+if(CREATE_ARCHIVE)
+	set(DEST ".")
+else()
+	set(DEST ${CMAKE_INSTALL_INCLUDEDIR})
+endif()
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/appdir.h"
-	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+	DESTINATION ${DEST})

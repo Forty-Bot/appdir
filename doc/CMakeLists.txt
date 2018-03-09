@@ -34,11 +34,13 @@ if(DOXYGEN_FOUND)
 		add_custom_target(doc DEPENDS ${DOCSTAMP})
 	endif()
 
-	if(UNIX AND NOT APPLE)
+	if(CREATE_ARCHIVE)
+		# Note trailing slash; this copies the contents and not the
+		# directory itself
+		install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html/"
+			DESTINATION "doc")
+	else()
 		install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html"
 			DESTINATION ${CMAKE_INSTALL_DOCDIR})
-	else()
-		install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-			DESTINATION ./)
 	endif()
 endif()

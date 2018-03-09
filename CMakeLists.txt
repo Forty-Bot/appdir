@@ -92,8 +92,25 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_STANDARD 90)
 set(CMAKE_C_EXTENSIONS OFF)
 
+if(UNIX)
+	set(_CREATE_ARCHIVE FALSE)
+else()
+	set(_CREATE_ARCHIVE TRUE)
+endif()
+set(CREATE_ARCHIVE ${_CREATE_ARCHIVE}
+	CACHE BOOL "Install files in an archive-style layout. This is meant to be used when creating an archive with CPack")
+
 # Initialize install dir helpers
 include(GNUInstallDirs)
+
+if(CREATE_ARCHIVE)
+	set(DEST ".")
+else()
+	set(DEST ${CMAKE_INSTALL_DOCDIR})
+endif()
+install(FILES "${CMAKE_SOURCE_DIR}/README.md"
+	"${CMAKE_SOURCE_DIR}/COPYING.LESSER"
+	DESTINATION ${DEST})
 
 add_subdirectory("${CMAKE_SOURCE_DIR}/src")
 add_subdirectory("${CMAKE_SOURCE_DIR}/test" EXCLUDE_FROM_ALL)
@@ -104,7 +121,7 @@ set(CPACK_PACKAGE_CONTACT "seanga2@gmail.com")
 set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_SOURCE_DIR}/README.md")
 set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
 
-set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/COPYING.LESSER")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/copyright")
 set(CPACK_RESOURCE_FILE_README "${CMAKE_SOURCE_DIR}/README.md")
 
 set(CPACK_MONOLITHIC_INSTALL TRUE)
