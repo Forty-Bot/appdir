@@ -53,7 +53,7 @@ if(GIT_FOUND)
 			OUTPUT_VARIABLE REV_SHORT)
 		if(NOT (REV_COUNT_RES OR REV_SHORT_RES))
 			string(REPLACE "\n" "" PROJECT_VERSION
-				"r${REV_COUNT}.${REV_SHORT}")
+				"0.0.r${REV_COUNT}.${REV_SHORT}")
 		endif()
 	endif()
 endif()
