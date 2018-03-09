@@ -64,11 +64,6 @@ endif()
 
 message(STATUS "Configuring ${PROJECT_NAME}-${PROJECT_VERSION}")
 
-if(UNIX AND NOT APPLE)
-	find_package(PkgConfig REQUIRED)
-	pkg_check_modules(XDG_BASEDIR REQUIRED libxdg-basedir)
-endif()
-
 include_directories("${CMAKE_SOURCE_DIR}/include")
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
