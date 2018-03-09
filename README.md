@@ -18,3 +18,27 @@ for (i = 0; (dir = cfg_dirs[i]); i++) {
 }
 appdir_list_put(cfg_dirs);
 ```
+
+## Building
+
+```bash
+mkdir build
+cd build
+cmake ..
+make
+```
+
+## Installing
+
+If you are on a POSIX system, you can install with `make install`. You can
+create a `.deb` or `.rpm` by configuring with `cmake -DCPACK_GENERATOR=RPM`, or
+with `DEB` as appropriate, and run `make package`. If you would like to create a
+tarball or zip, reconfigure with
+`cmake -DCREATE_ARCHIVE=TRUE -D -DCPACK_GENERATOR=ZIP ..`, then run
+`make package`. For a full list of valid generators, consult the
+[cmake wiki](https://cmake.org/Wiki/CMake:CPackPackageGenerators#Bundle_.28OSX_only.29).
+
+## Dependencies
+
+* `cmake`
+* `xdg-basedir` on Linux
