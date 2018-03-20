@@ -97,8 +97,9 @@ if(UNIX)
 else()
 	set(_CREATE_ARCHIVE TRUE)
 endif()
-set(CREATE_ARCHIVE ${_CREATE_ARCHIVE}
-	CACHE BOOL "Install files in an archive-style layout. This is meant to be used when creating an archive with CPack")
+option(CREATE_ARCHIVE
+	"Install files in an archive-style layout. This is meant to be used when creating an archive with CPack"
+	${_CREATE_ARCHIVE})
 
 # Initialize install dir helpers
 include(GNUInstallDirs)
