@@ -92,6 +92,9 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_STANDARD 90)
 set(CMAKE_C_EXTENSIONS OFF)
 
+# Do this in the top-level file so we can run ctest from the root build dir
+enable_testing()
+
 if(UNIX)
 	set(_CREATE_ARCHIVE FALSE)
 else()

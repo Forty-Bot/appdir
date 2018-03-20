@@ -15,7 +15,6 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with appdir. If not, see <http://www.gnu.org/licenses/>.
 
-enable_testing()
 add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND})
 
 function(add_custom_test TEST_NAME SOURCES)
