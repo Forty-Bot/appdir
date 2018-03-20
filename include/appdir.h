@@ -20,6 +20,8 @@
 #ifndef APPDIR_H
 #define APPDIR_H
 
+#include "appdir_export.h"
+
 /** \file appdir.h
  *  \brief The public api of appdir.
  *
@@ -53,7 +55,7 @@ extern "C" {
  *  \return A `malloc`'d string containing the data directory. On error, `NULL`
  *  is returned and `errno` is set.
  */
-char *appdir_data(const char *name, const char *author);
+char APPDIR_EXPORT *appdir_data(const char *name, const char *author);
 
 /** \brief Get a list of searchable data directories
  *
@@ -74,7 +76,7 @@ char *appdir_data(const char *name, const char *author);
  *  `malloc`. They can be `free`'d individually, or by using appdir_list_put().
  *  On error, `NULL` is returned and `errno` is set.
  */
-char **appdir_data_dirs(const char *name, const char *author);
+char APPDIR_EXPORT **appdir_data_dirs(const char *name, const char *author);
 
 /** \brief Get the per-user configuration directory
  *
@@ -91,7 +93,7 @@ char **appdir_data_dirs(const char *name, const char *author);
  *  \return A `malloc`'d string containing the configuration directory. On
  *  error, `NULL` is returned and `errno` is set.
  */
-char *appdir_cfg(const char *name, const char *author);
+char APPDIR_EXPORT *appdir_cfg(const char *name, const char *author);
 
 /** \brief Get a list of searchable configuration directories
  *
@@ -112,7 +114,7 @@ char *appdir_cfg(const char *name, const char *author);
  *  `malloc`. They can be `free`'d individually, or by using appdir_list_put().
  *  On error, `NULL` is returned and `errno` is set.
  */
-char **appdir_cfg_dirs(const char *name, const char *author);
+char APPDIR_EXPORT **appdir_cfg_dirs(const char *name, const char *author);
 
 /** \brief Get the per-user cache directory
  *
@@ -130,7 +132,7 @@ char **appdir_cfg_dirs(const char *name, const char *author);
  *  \return A `malloc`'d string containing the cache directory. On error, `NULL`
  *  is returned and `errno` is set.
  */
-char *appdir_cache(const char *name, const char *author);
+char APPDIR_EXPORT *appdir_cache(const char *name, const char *author);
 
 /** \brief Get the per-user logging directory
  *
@@ -148,7 +150,7 @@ char *appdir_cache(const char *name, const char *author);
  *  \return A `malloc`'d string containing the logging directory. On error,
  *  `NULL` is returned and `errno` is set.
  */
-char *appdir_log(const char *name, const char *author);
+char APPDIR_EXPORT *appdir_log(const char *name, const char *author);
 
 /** \brief Put a list of strings
  *
@@ -158,7 +160,7 @@ char *appdir_log(const char *name, const char *author);
  *
  *  \param dirs The list of strings to `free`.
  */
-void appdir_list_put(char **dirs);
+void APPDIR_EXPORT appdir_list_put(char **dirs);
 
 /** \brief A convenience struct returned by appdir_get()
  *
@@ -188,14 +190,14 @@ struct appdir {
  *  error, `NULL` is returned and `errno` is set.
  *  \sa appdir_put
  */
-struct appdir *appdir_get(const char *name, const char *author);
+struct appdir APPDIR_EXPORT *appdir_get(const char *name, const char *author);
 
 /** \brief Recursively frees a `struct` \ref appdir created by appdir_get()
  *
  *  \param ad The struct to free
  *  \sa appdir_get
  */
-void appdir_put(struct appdir *ad);
+void APPDIR_EXPORT appdir_put(struct appdir *ad);
 
 #ifdef __cplusplus
 }

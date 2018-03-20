@@ -20,9 +20,11 @@
 #ifndef INTERNAL_H
 #define INTERNAL_H
 
+#include "appdir_export.h"
+
 #define UNUSED(x) (void)x
 
 /** \brief Append a string to another */
-char *appdir_append(const char *a, const char *b);
+char APPDIR_NO_EXPORT *appdir_append(const char *a, const char *b);
 
 #endif /* INTERNAL_H */

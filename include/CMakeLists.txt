@@ -15,10 +15,14 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with appdir. If not, see <http://www.gnu.org/licenses/>.
 
+include(GenerateExportHeader)
+generate_export_header(${PROJECT_NAME})
+
 if(CREATE_ARCHIVE)
 	set(DEST ".")
 else()
 	set(DEST ${CMAKE_INSTALL_INCLUDEDIR})
 endif()
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/appdir.h"
+	"${CMAKE_CURRENT_BINARY_DIR}/appdir_export.h"
 	DESTINATION ${DEST})

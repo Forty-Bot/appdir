@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with appdir. If not, see <http://www.gnu.org/licenses/>.
 
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.3)
 
 if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
     message(FATAL_ERROR
@@ -65,6 +65,7 @@ endif()
 message(STATUS "Configuring ${PROJECT_NAME}-${PROJECT_VERSION}")
 
 include_directories("${CMAKE_SOURCE_DIR}/include")
+include_directories("${CMAKE_BINARY_DIR}/include")
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
@@ -91,6 +92,10 @@ endif()
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_STANDARD 90)
 set(CMAKE_C_EXTENSIONS OFF)
+
+# Set visibility settings (needed for export header)
+set(CMAKE_C_VISIBILITY_PRESET hidden)
+set(CMAKE_VISIBILITY_INLINES_HIDDEN 1)
 
 option(BUILD_TESTS "Build tests" OFF)
 # Do this in the top-level file so we can run ctest from the root build dir
