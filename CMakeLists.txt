@@ -92,6 +92,7 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_STANDARD 90)
 set(CMAKE_C_EXTENSIONS OFF)
 
+option(BUILD_TESTS "Build tests" OFF)
 # Do this in the top-level file so we can run ctest from the root build dir
 enable_testing()
 
@@ -117,7 +118,11 @@ install(FILES "${CMAKE_SOURCE_DIR}/README.md"
 	DESTINATION ${DEST})
 
 add_subdirectory("${CMAKE_SOURCE_DIR}/src")
-add_subdirectory("${CMAKE_SOURCE_DIR}/test" EXCLUDE_FROM_ALL)
+if(BUILD_TESTS)
+	add_subdirectory("${CMAKE_SOURCE_DIR}/test")
+else()
+	add_subdirectory("${CMAKE_SOURCE_DIR}/test" EXCLUDE_FROM_ALL)
+endif()
 add_subdirectory("${CMAKE_SOURCE_DIR}/doc")
 add_subdirectory("${CMAKE_SOURCE_DIR}/include")
 
