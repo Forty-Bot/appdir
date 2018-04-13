@@ -37,7 +37,7 @@ if(GIT_FOUND)
 		OUTPUT_VARIABLE GIT_OUT)
 	# Note that a successful result (0) is FALSE
 	if(NOT GIT_RES)
-		string(REGEX REPLACE "([^-]*-g)" "r\\1" TMP ${GIT_OUT})
+		string(REGEX REPLACE "([^-]*-)g" "r\\1" TMP ${GIT_OUT})
 		string(REPLACE "-" "." TMP ${TMP})
 		string(REPLACE "\n" "" PROJECT_VERSION ${TMP})
 	else()
@@ -51,12 +51,18 @@ if(GIT_FOUND)
 			"rev-parse" "--short" "HEAD"
 			RESULT_VARIABLE REV_SHORT_RES
 			OUTPUT_VARIABLE REV_SHORT)
-		if(NOT (REV_COUNT_RES OR REV_SHORT_RES))
+		if((NOT REV_COUNT_RES) AND (NOT REV_SHORT_RES))
 			string(REPLACE "\n" "" PROJECT_VERSION
 				"0.0.r${REV_COUNT}.${REV_SHORT}")
 		endif()
 	endif()
 endif()
+
+get_cmake_property(_variableNames VARIABLES)
+list (SORT _variableNames)
+foreach (_variableName ${_variableNames})
+    message(STATUS "${_variableName}=${${_variableName}}")
+endforeach()
 
 if(NOT PROJECT_VERSION)
 	set(PROJECT_VERSION "0.0.1.0")
