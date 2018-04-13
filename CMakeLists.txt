@@ -65,7 +65,7 @@ foreach (_variableName ${_variableNames})
 endforeach()
 
 if(NOT PROJECT_VERSION)
-	set(PROJECT_VERSION "0.0.1.0")
+	set(PROJECT_VERSION "0.1.0")
 endif()
 
 message(STATUS "Configuring ${PROJECT_NAME}-${PROJECT_VERSION}")
