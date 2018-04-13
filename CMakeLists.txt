@@ -130,6 +130,7 @@ else()
 endif()
 add_subdirectory("${CMAKE_SOURCE_DIR}/doc")
 add_subdirectory("${CMAKE_SOURCE_DIR}/include")
+add_subdirectory("${CMAKE_SOURCE_DIR}/cmake")
 
 set(CPACK_PACKAGE_CONTACT "seanga2@gmail.com")
 set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_SOURCE_DIR}/README.md")

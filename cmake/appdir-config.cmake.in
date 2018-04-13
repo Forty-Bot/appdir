@@ -15,16 +15,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with appdir. If not, see <http://www.gnu.org/licenses/>.
 
-include(GenerateExportHeader)
-generate_export_header(${PROJECT_NAME})
+@PACKAGE_INIT@
 
-if(CREATE_ARCHIVE)
-	set(DEST "include")
-else()
-	set(DEST ${CMAKE_INSTALL_INCLUDEDIR})
-endif()
-install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/appdir.h"
-	"${CMAKE_CURRENT_BINARY_DIR}/appdir_export.h"
-	DESTINATION ${DEST})
-
-target_include_directories(appdir INTERFACE "$<INSTALL_INTERFACE:${DEST}>")
+include("${CMAKE_CURRENT_LIST_DIR}/appdir-targets.cmake")
+check_required_components(appdir)

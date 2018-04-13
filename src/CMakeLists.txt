@@ -31,7 +31,7 @@ add_library(${PROJECT_NAME} SHARED ${SOURCES})
 if(UNIX AND NOT APPLE)
 	find_package(PkgConfig REQUIRED)
 	pkg_check_modules(XDG_BASEDIR REQUIRED libxdg-basedir)
-	target_link_libraries(${PROJECT_NAME} ${XDG_BASEDIR_LIBRARIES})
+	target_link_libraries(${PROJECT_NAME} PUBLIC ${XDG_BASEDIR_LIBRARIES})
 endif()
 
 if(CREATE_ARCHIVE)
@@ -40,4 +40,5 @@ else()
 	set(DEST ${CMAKE_INSTALL_LIBDIR})
 endif()
 install(TARGETS ${PROJECT_NAME}
+	EXPORT appdir-targets
 	DESTINATION ${DEST})
