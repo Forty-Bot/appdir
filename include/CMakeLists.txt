@@ -19,7 +19,7 @@ include(GenerateExportHeader)
 generate_export_header(${PROJECT_NAME})
 
 if(CREATE_ARCHIVE)
-	set(DEST ".")
+	set(DEST "include")
 else()
 	set(DEST ${CMAKE_INSTALL_INCLUDEDIR})
 endif()

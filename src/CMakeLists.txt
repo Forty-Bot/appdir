@@ -35,7 +35,7 @@ if(UNIX AND NOT APPLE)
 endif()
 
 if(CREATE_ARCHIVE)
-	set(DEST ".")
+	set(DEST "lib")
 else()
 	set(DEST ${CMAKE_INSTALL_LIBDIR})
 endif()
