@@ -86,7 +86,7 @@ static char **appdir_getenv_list(const char *name, const char *author,
 	char **dirs;
 	size_t i;
 
-	dirs = malloc(sizeof(*dirs) * n);
+	dirs = malloc(sizeof(*dirs) * (n + 1));
 	if (!dirs)
 		return NULL;
 
@@ -100,6 +100,7 @@ static char **appdir_getenv_list(const char *name, const char *author,
 			return NULL;
 		}
 	}
+	dirs[i] = NULL;
 
 	return dirs;
 }
