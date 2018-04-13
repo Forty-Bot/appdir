@@ -58,12 +58,6 @@ if(GIT_FOUND)
 	endif()
 endif()
 
-get_cmake_property(_variableNames VARIABLES)
-list (SORT _variableNames)
-foreach (_variableName ${_variableNames})
-    message(STATUS "${_variableName}=${${_variableName}}")
-endforeach()
-
 if(NOT PROJECT_VERSION)
 	set(PROJECT_VERSION "0.1.0")
 endif()
