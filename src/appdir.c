@@ -17,6 +17,7 @@
  * along with appdir. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "internal.h"
 #include "appdir.h"
 
 #include <stdlib.h>
