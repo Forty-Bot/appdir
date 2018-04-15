@@ -150,10 +150,11 @@ struct appdir *appdir_get(const char *name, const char *author) {
 	if (!ret)
 		return NULL;
 
-	if(!(ret->data_dirs = appdir_data_dirs(name, author))
-		|| !(ret->cfg_dirs = appdir_cfg_dirs(name, author))
-		|| !(ret->cache = appdir_append(ret->data_dirs[0], "\\Cache"))
-		|| !(ret->log = appdir_append(ret->data_dirs[0], "\\Logs")))
+	ret->data_dirs = appdir_data_dirs(name, author);
+	ret->cfg_dirs = appdir_cfg_dirs(name, author);
+	ret->cache = appdir_append(ret->data_dirs[0], "\\Cache");
+	ret->log = appdir_append(ret->data_dirs[0], "\\Logs");
+	if(!ret->data_dirs || !ret->cfg_dirs || !ret->cache || !ret->log)
 		return NULL;
 
 	return ret;
