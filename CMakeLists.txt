@@ -84,8 +84,12 @@ if(MSVC)
 	else()
 		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /W4")
 	endif()
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Weverything -pedantic -Wno-documentation-unknown-command")
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
 else()
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -pedantic")
+	message(WARNING "Could not set the warning level (unknown compiler)")
 endif()
 
 # Set the standard to C89
