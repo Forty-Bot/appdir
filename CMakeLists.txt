@@ -97,6 +97,11 @@ set(CMAKE_C_EXTENSIONS OFF)
 set(CMAKE_C_VISIBILITY_PRESET hidden)
 set(CMAKE_VISIBILITY_INLINES_HIDDEN 1)
 
+find_program(CCACHE_FOUND "ccache")
+if(CCACHE_FOUND)
+	set(CMAKE_CXX_COMPILER_LAUNCHER "ccache")
+endif()
+
 option(BUILD_TESTS "Build tests" OFF)
 # Do this in the top-level file so we can run ctest from the root build dir
 enable_testing()
